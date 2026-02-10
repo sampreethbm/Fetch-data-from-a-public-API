@@ -1,125 +1,70 @@
+const API_URL = 'https://randomuser.me/api/';
 
-// Get HTML elements
-const button = document.getElementById("btn");
-const cityInput = document.getElementById("city");
-const result = document.getElementById("result");
+const elements = {
+    img: document.getElementById('user-img'),
+    name: document.getElementById('user-name'),
+    email: document.getElementById('user-email'),
+    location: document.getElementById('user-location'),
+    btn: document.getElementById('generate-btn'),
+    errorMsg: document.getElementById('error-msg')
+};
 
-// When button is clicked
-button.addEventListener("click", getWeather);
+async function fetchUser() {
+    setLoadingState(true);
+    
+    try {
+        // 1. Fetch Data
+        const response = await fetch(API_URL);
 
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
-// Main function
-async function getWeather() {
+        const data = await response.json();
+        const user = data.results[0];
 
-  const city = cityInput.value.trim();
+        // 2. Update UI
+        updateProfile(user);
 
-  // Check if input is empty
-  if (city === "") {
-    alert("Please enter a city name");
-    return;
-  }
-
-  // Show loading state
-  button.disabled = true;
-  button.textContent = "Loading...";
-  result.innerHTML = "";
-
-
-  try {
-
-    /* ============================
-       STEP 1: Get Latitude & Longitude
-    ============================ */
-
-    const geoURL =
-      `https://geocoding-api.open-meteo.com/v1/search?name=${city}`;
-
-    const geoResponse = await fetch(geoURL);
-
-    // Check response
-    if (!geoResponse.ok) {
-      throw new Error("City search failed");
+    } catch (error) {
+        console.error('Error fetching user:', error);
+        elements.errorMsg.style.display = 'block';
+        elements.errorMsg.textContent = '⚠️ Network error. Please check your connection.';
+    } finally {
+        setLoadingState(false);
     }
-
-    const geoData = await geoResponse.json();
-
-    // If city not found
-    if (!geoData.results) {
-      throw new Error("City not found");
-    }
-
-    const latitude = geoData.results[0].latitude;
-    const longitude = geoData.results[0].longitude;
-
-
-    /* ============================
-       STEP 2: Get Weather Data
-    ============================ */
-
-    const weatherURL =
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
-
-    const weatherResponse = await fetch(weatherURL);
-
-    if (!weatherResponse.ok) {
-      throw new Error("Weather data not available");
-    }
-
-    const weatherData = await weatherResponse.json();
-
-
-    // Show result
-    displayWeather(weatherData);
-
-  }
-
-
-  // Handle errors
-  catch (error) {
-
-    result.innerHTML = `
-      <p class="error">
-        ${error.message}
-      </p>
-    `;
-
-    console.log(error);
-  }
-
-
-  // Always run this
-  finally {
-
-    button.disabled = false;
-    button.textContent = "Get Weather";
-  }
-
 }
 
-
-// Function to display data
-function displayWeather(data) {
-
-  const weather = data.current_weather;
-
-  result.innerHTML = `
-
-    <h3>Weather Report</h3>
-
-    <p>
-      Temperature: 
-      ${weather.temperature} °C
-    </p>
-
-    <p>
-      Wind Speed: 
-      ${weather.windspeed} km/h
-    </p>
-
-    <p>
-      Time: 
-      ${weather.time}
-    </p>
-
-  `;
+function updateProfile(user) {
+    elements.img.src = user.picture.large;
+    elements.name.textContent = `${user.name.first} ${user.name.last}`;
+    elements.email.textContent = user.email;
+    elements.location.textContent = `${user.location.city}, ${user.location.country}`;
 }
+
+function setLoadingState(isLoading) {
+    elements.btn.disabled = isLoading;
+    elements.errorMsg.style.display = 'none';
+
+    if (isLoading) {
+        elements.btn.textContent = 'Fetching...';
+        // Add skeleton classes for loading effect
+        elements.name.classList.add('skeleton-text');
+        elements.email.classList.add('skeleton-text');
+        elements.location.classList.add('skeleton-text');
+        elements.img.classList.add('skeleton');
+    } else {
+        elements.btn.textContent = 'Generate New User';
+        // Remove skeleton classes
+        elements.name.classList.remove('skeleton-text');
+        elements.email.classList.remove('skeleton-text');
+        elements.location.classList.remove('skeleton-text');
+        elements.img.classList.remove('skeleton');
+    }
+}
+
+// Event Listeners
+elements.btn.addEventListener('click', fetchUser);
+
+// Initial Load
+document.addEventListener('DOMContentLoaded', fetchUser);
