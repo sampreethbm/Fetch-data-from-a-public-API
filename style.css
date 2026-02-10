@@ -1,42 +1,119 @@
+/* Reset */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* Page */
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
-  text-align: center;
-  padding: 50px;
+  font-family: "Inter", Arial, sans-serif;
+  background: linear-gradient(135deg, #74b9ff, #0984e3);
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Main box */
-.box {
+
+/* App Card */
+
+.app {
   background: white;
-  width: 320px;
-  margin: auto;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px gray;
+  width: 350px;
+  padding: 25px;
+
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+
+  text-align: center;
 }
 
-/* Input field */
-input {
-  width: 90%;
-  padding: 10px;
-  margin-bottom: 10px;
-  font-size: 16px;
+
+/* Title */
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 5px;
 }
+
+.subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+
+/* Search Area */
+
+.search-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input {
+  flex: 1;
+
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+
+  font-size: 15px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #0984e3;
+}
+
 
 /* Button */
+
 button {
-  width: 95%;
-  padding: 10px;
-  font-size: 16px;
+  background: #0984e3;
+  color: white;
+
+  border: none;
+  border-radius: 8px;
+
+  padding: 10px 15px;
+
+  font-size: 15px;
   cursor: pointer;
+
+  transition: 0.2s;
 }
 
-/* Result area */
-#result {
-  margin-top: 20px;
+button:hover {
+  background: #066bb8;
 }
 
-/* Error text */
+button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+
+/* Result */
+
+.result {
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+.result h3 {
+  margin-bottom: 10px;
+}
+
+
+/* Error */
+
 .error {
-  color: red;
+  color: #d63031;
+  font-weight: 600;
 }
