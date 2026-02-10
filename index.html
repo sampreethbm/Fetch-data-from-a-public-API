@@ -3,42 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern User Profile Generator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Daily Inspiration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <main class="container">
-        <div class="profile-card">
-            <div class="card-header">
-                <div class="image-wrapper">
-                    <img id="user-img" src="" alt="User Avatar" class="skeleton">
-                </div>
+    <div class="container">
+        <div class="quote-card" id="quote-card">
+            <div class="quote-icon">
+                <i class="fas fa-quote-left"></i>
+            </div>
+            
+            <div class="quote-content">
+                <p id="quote" class="quote-text">Loading inspiration...</p>
+                <p id="author" class="author-text"></p>
             </div>
 
-            <div class="card-body">
-                <h2 id="user-name" class="skeleton-text">Loading Name...</h2>
-                <div class="info-group">
-                    <span class="label">Email</span>
-                    <p id="user-email" class="skeleton-text">loading@example.com</p>
-                </div>
-                <div class="info-group">
-                    <span class="label">Location</span>
-                    <p id="user-location" class="skeleton-text">City, Country</p>
-                </div>
-            </div>
-
-            <div class="card-footer">
-                <button id="generate-btn">
-                    <span>Generate New User</span>
+            <div class="button-container">
+                <button id="twitter-btn" class="icon-btn" title="Tweet this!">
+                    <i class="fab fa-twitter"></i>
                 </button>
-                <div id="error-msg" class="error-toast">
-                    ⚠️ Failed to fetch data. Try again.
-                </div>
+                <button id="new-quote-btn" class="main-btn">New Quote</button>
             </div>
         </div>
-    </main>
+        <div id="loader" class="loader"></div>
+    </div>
 
     <script src="script.js"></script>
 </body>
