@@ -41,7 +41,7 @@ temperature and wind speed.
 5. If any error occurs, an error message is shown.
 
 ---
-
+```
 ## Folder Structure
 
 weather-app
@@ -52,7 +52,7 @@ weather-app
 └── README.md
 
 ---
-
+```
 ## How To Run The Project
 
 1. Download or copy the project folder.
