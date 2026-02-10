@@ -1,47 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Weather App</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern User Profile Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <div class="app">
+    <main class="container">
+        <div class="profile-card">
+            <div class="card-header">
+                <div class="image-wrapper">
+                    <img id="user-img" src="" alt="User Avatar" class="skeleton">
+                </div>
+            </div>
 
-    <h1>Weather Forecast</h1>
-    <p class="subtitle">
-      Check real-time weather easily
-    </p>
+            <div class="card-body">
+                <h2 id="user-name" class="skeleton-text">Loading Name...</h2>
+                <div class="info-group">
+                    <span class="label">Email</span>
+                    <p id="user-email" class="skeleton-text">loading@example.com</p>
+                </div>
+                <div class="info-group">
+                    <span class="label">Location</span>
+                    <p id="user-location" class="skeleton-text">City, Country</p>
+                </div>
+            </div>
 
-    <div class="search-box">
+            <div class="card-footer">
+                <button id="generate-btn">
+                    <span>Generate New User</span>
+                </button>
+                <div id="error-msg" class="error-toast">
+                    ⚠️ Failed to fetch data. Try again.
+                </div>
+            </div>
+        </div>
+    </main>
 
-      <input
-        type="text"
-        id="cityInput"
-        placeholder="Enter city name"
-      >
-
-      <button id="getWeatherBtn">
-        Search
-      </button>
-
-    </div>
-
-    <div id="output" class="result"></div>
-
-  </div>
-
-  <!-- JS -->
-  <script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
