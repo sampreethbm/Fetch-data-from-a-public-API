@@ -60,9 +60,4 @@ weather-app
 4. The app will open in your browser.
 5. Enter a city name and click "Get Weather".
 
----
 
-## Author
-
-Name: (Write Your Name Here)
-Course: Engineering / Computer Science
